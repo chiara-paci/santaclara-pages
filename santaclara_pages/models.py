@@ -101,10 +101,11 @@ class Page(VersionedAbstract,DefaultUrl):
         return self.__getattribute__(model)
 
     def __unicode__(self): 
-        if self.title:
-            return unicode(self.title)
-        else:
-            return "["+unicode(self.name)+"]"
+        return unicode(self.name)
+        # if self.title:
+        #     return unicode(self.title)
+        # else:
+        #     return "["+unicode(self.name)+"]"
 
     def get_absolute_url(self):
         try:
