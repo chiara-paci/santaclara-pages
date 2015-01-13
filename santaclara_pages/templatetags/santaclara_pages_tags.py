@@ -10,3 +10,11 @@ def page_url(name):
     except Page.DoesNotExist:
         return name
     return page.get_absolute_url()
+
+@register.simple_tag
+def page_class(name):
+    try:
+        page=Page.objects.get(name=name)
+    except Page.DoesNotExist:
+        return "invalidpagename"
+    return "validpagename"
