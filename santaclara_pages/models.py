@@ -38,15 +38,6 @@ class MenuSubMenuRelation(PositionAbstract):
     def __unicode__(self): 
         return(unicode(self.parent)+"/"+unicode(self.child))
 
-class FooterSection(PositionAbstract):
-    menu = models.ForeignKey(Menu)
-
-    class Meta:
-        ordering = [ "pos" ]
-
-    def __unicode__(self): 
-        return unicode(self.menu)
-
 class MenuObject(PositionAbstract):
     parent = models.ForeignKey(Menu)
     content_type = models.ForeignKey(ContentType,editable=False,blank=True,null=True)
@@ -203,4 +194,37 @@ class SchedaValue(models.Model):
 
     def __unicode__(self):
         return unicode(self.key)+": "+unicode(self.value)
+    
+class FooterSection(PositionAbstract):
+    menu = models.ForeignKey(Menu)
+
+    class Meta:
+        ordering = [ "pos" ]
+
+    def __unicode__(self): 
+        return unicode(self.menu)
+
+class HomeSection(PositionAbstract):
+    label = models.SlugField(unique=True)
+
+    class Meta:
+        ordering = [ "pos" ]
+
+    def __unicode__(self): 
+        return unicode(self.label)
+    
+class HomeBlock(PositionAbstract):
+    section = models.ForeignKey(HomeSection)
+    image_url = models.CharField(max_length=2048,blank=True)
+    image_alt = models.CharField(max_length=2048,blank=True)
+    title = models.CharField(max_length=2048)
+    page = models.ForeignKey(Page)
+    num_words = models.IntegerField(default=100)
+    valid = models.BooleanField()
+
+    class Meta:
+        ordering = [ "pos" ]
+
+    def __unicode__(self): 
+        return unicode(self.title)
     
