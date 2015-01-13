@@ -13,7 +13,7 @@ class FooterSectionAdmin(admin.ModelAdmin):
     list_display = [ "__unicode__","menu","pos" ]
     list_editable = [ "pos","menu" ]
 
-admin.site.register(FooterSection,FooterSection)
+admin.site.register(FooterSection,FooterSectionAdmin)
 
 class MenuItemInternalAdmin(admin.ModelAdmin):
     form=MenuItemInternalForm
