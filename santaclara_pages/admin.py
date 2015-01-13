@@ -3,7 +3,7 @@ from django.utils.html import format_html
 
 # Register your models here.
 from santaclara_pages.models import Menu,MenuSubMenuRelation,MenuObject,MenuSeparator,MenuItem,MenuTitle
-from santaclara_pages.models import Page,PageMenuRelation,MenuItemInternal,MenuTitleInternal,File,Image
+from santaclara_pages.models import Page,PageMenuRelation,MenuItemInternal,MenuTitleInternal,File,Image,Icon
 from santaclara_pages.models import Scheda,SchedaValue,SchedaKey
 from santaclara_base.admin import VersionedObjectAdmin,VersionInline
 
@@ -35,15 +35,15 @@ admin.site.register(SchedaKey)
 admin.site.register(SchedaValue)
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display=('name','preview','path','url')
+    list_display=('name','preview','url')
 
     def preview(self,obj):
         return format_html('<img width="48px" src="{0}"/>',obj.url())
 
     preview.allow_tags = True
-        
 
 admin.site.register(Image,ImageAdmin)
+admin.site.register(Icon,ImageAdmin)
 
 class FileAdmin(admin.ModelAdmin):
     list_display=('name','path')

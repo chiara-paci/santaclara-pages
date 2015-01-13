@@ -167,6 +167,9 @@ class Icon(models.Model):
     def __unicode__(self): 
         return unicode(self.name)
 
+    def url(self):
+        return self.path.replace(settings.MEDIA_ROOT,settings.MEDIA_URL)
+
 class SchedaKey(models.Model):
     name = models.CharField(max_length=1024,unique=True)
 
