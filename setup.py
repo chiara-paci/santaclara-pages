@@ -8,11 +8,12 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='santaclara_pages',
-    version='0.1.0.6',
+    version='0.1.1.1',
     packages=['santaclara_pages'],
     package_data={'santaclara_pages': [
             "management/__init__.py",
             "management/commands/*",
+            "templatetags/*py",
             # "static/santaclara_pages/*",
             # "templates/santaclara_pages/*.html",
             # "templates/santaclara_pages/*.json",
