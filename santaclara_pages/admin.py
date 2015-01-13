@@ -130,6 +130,7 @@ class SchedaInline(admin.TabularInline):
 
 class PageAdmin(VersionedObjectAdmin):
     list_display=("name","title","has_toc")
+    ordering=("name","title")
     inlines = (SchedaInline,PageMenuInline,VersionInline)
 
 admin.site.register(Page,PageAdmin)
