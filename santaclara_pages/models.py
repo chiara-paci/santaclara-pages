@@ -41,6 +41,9 @@ class MenuSubMenuRelation(PositionAbstract):
 class FooterSection(PositionAbstract):
     menu = models.ForeignKey(Menu)
 
+    class Meta:
+        ordering = [ "pos" ]
+
     def __unicode__(self): 
         return unicode(self.menu)
 
@@ -95,6 +98,9 @@ class Page(VersionedAbstract,DefaultUrl):
     num_columns = models.PositiveIntegerField(default=1)
     menus = models.ManyToManyField(Menu,through="PageMenuRelation")
     content_type = models.ForeignKey(ContentType,editable=False,blank=True,null=True)
+
+    class Meta:
+        ordering = [ "title","name" ]
 
     def type(self):
         return unicode(self.content_type)
