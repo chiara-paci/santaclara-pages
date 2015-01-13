@@ -220,7 +220,7 @@ class HomeBlock(PositionAbstract):
     title = models.CharField(max_length=2048)
     page = models.ForeignKey(Page)
     num_words = models.IntegerField(default=100)
-    valid = models.BooleanField()
+    valid = models.BooleanField(default=True)
 
     class Meta:
         ordering = [ "pos" ]
