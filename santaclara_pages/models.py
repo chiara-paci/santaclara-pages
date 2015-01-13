@@ -42,7 +42,7 @@ class FooterSection(PositionAbstract):
     menu = models.ForeignKey(Menu)
 
     def __unicode__(self): 
-        return("footer/"+unicode(self.child))
+        return("footer/"+unicode(self.menu))
 
 class MenuObject(PositionAbstract):
     parent = models.ForeignKey(Menu)
