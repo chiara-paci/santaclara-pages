@@ -9,7 +9,11 @@ from santaclara_base.admin import VersionedObjectAdmin,VersionInline
 
 from santaclara_pages.forms import MenuItemInternalForm,MenuTitleInternalForm
 
-admin.site.register(FooterSection)
+class FooterSectionAdmin(admin.ModelAdmin):
+    list_display = [ "__unicode__","menu","pos" ]
+    list_editable = [ "pos","menu" ]
+
+admin.site.register(FooterSection,FooterSection)
 
 class MenuItemInternalAdmin(admin.ModelAdmin):
     form=MenuItemInternalForm
