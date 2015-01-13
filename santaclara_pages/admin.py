@@ -38,7 +38,7 @@ class ImageAdmin(admin.ModelAdmin):
     list_display=('name','preview','path','url')
 
     def preview(self,obj):
-        return format_html('<img width="16px" src="{0}"/>',obj.url())
+        return format_html('<img width="48px" src="{0}"/>',obj.url())
 
     preview.allow_tags = True
         
