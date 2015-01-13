@@ -91,7 +91,7 @@ class Page(VersionedAbstract,DefaultUrl):
     content_type = models.ForeignKey(ContentType,editable=False,blank=True,null=True)
 
     class Meta:
-        ordering = [ "title","name" ]
+        ordering = [ "name","title" ]
 
     def type(self):
         return unicode(self.content_type)
