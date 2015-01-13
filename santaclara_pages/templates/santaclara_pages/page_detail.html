@@ -1,29 +1,23 @@
 {% extends "base.html" %}
-{% load gianozia_pages_tags %}
+{% load santaclara_pages_tags %}
 {% load santa_clara_editor %}
 {% load i18n %}
 {% load humanize %}
 
-{% block content %}
+{% block contenttitle %}
 
 <div id="pagetitle"><h1 class="title">{{ page.title }}</h1></div>
+{% endblock %}
 
+
+{% block contenttext %}
 {% if page.menus.all %}
-{% include "gianozia_pages/includes/menu.html" with menu_list=page.menus.all %}
+{% include "santaclara_pages/includes/menu.html" with menu_list=page.menus.all %}
 {% endif %}
 
 <div class="pagecontent">
   {% if page.scheda_set.all %}
-  <div class="pageschedabox">
-    <div class="pagescheda">
-      <img class="bullet" src="{{ GIANOZIA_BRAND }}/bullet32.png"/>
-      {% for s in page.scheda_set.all %}
-      {% for v in s.schedavalue_set.all %}
-      <p>{{ v.key }}: {{ v.value }}</p>
-      {% endfor %}
-      {% endfor %}
-    </div>
-  </div>
+  {% include "santaclara_pages/includes/menu.html" with scheda_list=page.scheda_set.all %}
   {% endif %}
   
   {% if page.has_toc %}
