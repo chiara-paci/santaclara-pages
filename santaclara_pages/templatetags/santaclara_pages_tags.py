@@ -8,7 +8,7 @@ def page_url(name):
     try:
         page=Page.objects.get(name=name)
     except Page.DoesNotExist:
-        return name
+        return ""
     return page.get_absolute_url()
 
 @register.simple_tag
