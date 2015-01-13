@@ -219,7 +219,7 @@ class HomeBlock(PositionAbstract):
     image_alt = models.CharField(max_length=2048,blank=True)
     title = models.CharField(max_length=2048)
     page = models.ForeignKey(Page)
-    num_words = models.IntegerField(default=100)
+    num_words = models.IntegerField(default=60)
     valid = models.BooleanField(default=True)
 
     class Meta:
