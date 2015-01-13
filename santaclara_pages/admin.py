@@ -4,10 +4,12 @@ from django.utils.html import format_html
 # Register your models here.
 from santaclara_pages.models import Menu,MenuSubMenuRelation,MenuObject,MenuSeparator,MenuItem,MenuTitle
 from santaclara_pages.models import Page,PageMenuRelation,MenuItemInternal,MenuTitleInternal,File,Image,Icon
-from santaclara_pages.models import Scheda,SchedaValue,SchedaKey
+from santaclara_pages.models import Scheda,SchedaValue,SchedaKey,FooterSection
 from santaclara_base.admin import VersionedObjectAdmin,VersionInline
 
 from santaclara_pages.forms import MenuItemInternalForm,MenuTitleInternalForm
+
+admin.site.register(FooterSection)
 
 class MenuItemInternalAdmin(admin.ModelAdmin):
     form=MenuItemInternalForm

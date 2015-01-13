@@ -38,6 +38,12 @@ class MenuSubMenuRelation(PositionAbstract):
     def __unicode__(self): 
         return(unicode(self.parent)+"/"+unicode(self.child))
 
+class FooterSection(PositionAbstract):
+    menu = models.ForeignKey(Menu)
+
+    def __unicode__(self): 
+        return("footer/"+unicode(self.child))
+
 class MenuObject(PositionAbstract):
     parent = models.ForeignKey(Menu)
     content_type = models.ForeignKey(ContentType,editable=False,blank=True,null=True)
