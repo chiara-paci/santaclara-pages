@@ -30,11 +30,11 @@ class IUrlTag(tags.Tag):
             try:
                 page=Page.objects.get(name=self.args["page"])
                 url=page.get_absolute_url()
-                class="validpagename"
+                hclass="validpagename"
             except Page.DoesNotExist, e:
                 url=""
-                class="invalidpagename"
-        S='<a href="'+url+'" class="'+class+'">'
+                hclass="invalidpagename"
+        S='<a href="'+url+'" class="'+hclass+'">'
         S+=tags.Tag.output(self,autoescape,outtype)
         S+="</a>"
         return(S)
