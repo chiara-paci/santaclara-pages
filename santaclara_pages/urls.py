@@ -7,12 +7,12 @@ from santaclara_pages.models import Page
 from santaclara_base.decorators import staff_or_404,permission_or_404
 
 urlpatterns =patterns('',
-                      ( r'^pages/$',ListView.as_view(model=Page,
+                      ( r'^page/$',ListView.as_view(model=Page,
                                                      context_object_name="page_list")),
-                      ( r'^pages/(?P<pk>\d+)/?$',
+                      ( r'^page/(?P<pk>\d+)/?$',
                         permission_or_404("santaclara_pages.view_page",model=Page)(DetailView.as_view(model=Page,
                                                                                                       context_object_name="page"))),
-                      ( r'^pages/(?P<pk>\d+)-[^/]+/?$',
+                      ( r'^page/(?P<pk>\d+)-[^/]+/?$',
                         permission_or_404("santaclara_pages.view_page",model=Page)(DetailView.as_view(model=Page,
                                                                                                       context_object_name="page"))),
                       )
