@@ -22,8 +22,9 @@ class HomeSectionAdmin(admin.ModelAdmin):
 admin.site.register(HomeSection,HomeSectionAdmin)
 
 class HomeBlockAdmin(admin.ModelAdmin):
-    list_display = [ "__unicode__","pos","title","page","num_words", "valid" ]
-    list_editable = [ "pos","num_words","valid" ]
+    list_display = [ "__unicode__","pos","title","page","num_words", "valid","section" ]
+    list_editable = [ "pos","num_words","valid","section" ]
+    list_filter = [ "section" ]
 
 admin.site.register(HomeBlock,HomeBlockAdmin)
 
