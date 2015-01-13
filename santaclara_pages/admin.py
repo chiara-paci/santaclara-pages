@@ -4,7 +4,7 @@ from django.utils.html import format_html
 # Register your models here.
 from santaclara_pages.models import Menu,MenuSubMenuRelation,MenuObject,MenuSeparator,MenuItem,MenuTitle
 from santaclara_pages.models import Page,PageMenuRelation,MenuItemInternal,MenuTitleInternal,File,Image,Icon
-from santaclara_pages.models import Scheda,SchedaValue,SchedaKey,FooterSection
+from santaclara_pages.models import Scheda,SchedaValue,SchedaKey,FooterSection,HomeSection,HomeBlock
 from santaclara_base.admin import VersionedObjectAdmin,VersionInline
 
 from santaclara_pages.forms import MenuItemInternalForm,MenuTitleInternalForm
@@ -14,6 +14,18 @@ class FooterSectionAdmin(admin.ModelAdmin):
     list_editable = [ "pos","menu" ]
 
 admin.site.register(FooterSection,FooterSectionAdmin)
+
+class HomeSectionAdmin(admin.ModelAdmin):
+    list_display = [ "__unicode__","label","pos" ]
+    list_editable = [ "pos","label" ]
+
+admin.site.register(HomeSection,HomeSectionAdmin)
+
+class HomeBlockAdmin(admin.ModelAdmin):
+    list_display = [ "__unicode__","pos","title","page","num_words", "valid" ]
+    list_editable = [ "pos","num_words","valid" ]
+
+admin.site.register(HomeBlock,HomeBlockAdmin)
 
 class MenuItemInternalAdmin(admin.ModelAdmin):
     form=MenuItemInternalForm
