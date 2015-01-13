@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load gianozia_pages_tags %}
+{% load santa_clara_editor %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+<h1 class="title">{% trans "Page List" %}</h1>
+
+<div class="pagecontent">
+{% for page in page_list %}
+<p><a href="{{ page.get_absolute_url}}">{{ page }}</a></p>
+{% endfor %}
+</div>
+
+{% endblock %}

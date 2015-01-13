@@ -1,0 +1,17 @@
+<div class="pagemenu">
+  {% for menu in menu_list %}
+  {% for pos,type,item in menu.get_items %}
+  {% if type == "menu title internal" %}
+  <div class="pagemenuitem"><h{{ item.level }}><a href="{{ item.page.get_absolute_url }}">{{ item.text }}</a></h{{ item.level }}></div>
+  {% elif type == "menu item internal" %}
+  <div class="pagemenuitem"><p class="level{{ item.level }}"><a href="{{ item.page.get_absolute_url }}">{{ item.text }}</a></p></div>
+  {% elif type == "menu title" %}
+  <div class="pagemenuitem"><h{{ item.level }}>{% if item.url %}<a href="{{ item.url }}">{% endif %}{{ item.text }}{% if item.url %}</a>{% endif %}</h{{ item.level }}></div>
+  {% elif type == "menu item" %}
+  <div class="pagemenuitem"><p class="level{{ item.level }}">{% if item.url %}<a href="{{ item.url }}">{% endif %}{{ item.text }}{% if item.url %}</a>{% endif %}</p></div>
+  {% else %}
+  <div class="pagemenuitem"><p>{{ pos }}, {{ type }}, {{ item }}</p></div>
+  {% endif %}
+  {% endfor %}
+  {% endfor %}
+</div>
