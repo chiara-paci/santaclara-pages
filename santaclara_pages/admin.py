@@ -13,7 +13,6 @@ from santaclara_pages.forms import MenuItemInternalForm,MenuTitleInternalForm
 class CopyrightAdmin(admin.ModelAdmin):
     list_display=[ "__unicode__","short_name","long_name","logo_html",'logo_render' ]
     list_editable=[ "short_name",'long_name','logo_html' ]
-    list_filter=['family']
 
     class Media:
         css = {
