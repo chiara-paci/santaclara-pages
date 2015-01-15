@@ -31,4 +31,4 @@
 {{ page.text|santa_clara_lang }}
 {% endblock contenttext %}
 
-{% block contentfooter %}{% trans "last update" %}: {{ page.current.last_modified }}{% endblock %}
+{% block contentfooter %}{% trans "last update" %}: {{ page.current.last_modified|naturalday:"j M Y" }} {{ page.current.last_modified|time:"H:i" }} {{ page.copyright.logo }}{% endblock %}
