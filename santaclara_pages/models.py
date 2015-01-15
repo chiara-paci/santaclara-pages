@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.safestring import SafeUnicode
 
 from santaclara_base.models import PositionAbstract
 from santaclara_base.models import VersionedAbstract
@@ -10,6 +11,17 @@ from django.contrib.contenttypes.models import ContentType
 import santaclara_base.utility
 
 # Create your models here.
+
+class Copyright(models.Model):
+    short_name = models.CharField(max_length=2048,unique=True)
+    long_name = models.CharField(max_length=2048,blank=True)
+    logo_html = models.CharField(max_length=2048,blank=True)
+
+    def __unicode__(self):
+        return unicode(self.long_name)
+
+    def logo(self): 
+        return SafeUnicode(self.logo_html)
 
 class Menu(models.Model):
     name = models.CharField(max_length=2048,unique=True)

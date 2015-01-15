@@ -4,10 +4,30 @@ from django.utils.html import format_html
 # Register your models here.
 from santaclara_pages.models import Menu,MenuSubMenuRelation,MenuObject,MenuSeparator,MenuItem,MenuTitle
 from santaclara_pages.models import Page,PageMenuRelation,MenuItemInternal,MenuTitleInternal,File,Image,Icon
-from santaclara_pages.models import Scheda,SchedaValue,SchedaKey,FooterSection,HomeSection,HomeBlock
+from santaclara_pages.models import Scheda,SchedaValue,SchedaKey,FooterSection,HomeSection,HomeBlock,Copyright
+
 from santaclara_base.admin import VersionedObjectAdmin,VersionInline
 
 from santaclara_pages.forms import MenuItemInternalForm,MenuTitleInternalForm
+
+class CopyrightAdmin(admin.ModelAdmin):
+    list_display=[ "__unicode__","short_name","long_name","logo_html",'logo_render' ]
+    list_editable=[ "short_name",'long_name','logo_html' ]
+    list_filter=['family']
+
+    class Media:
+        css = {
+            "all": (
+                "css/font-awesome.min.css",
+                "css/creativecommons.css",
+                )
+            }
+    
+    def log_render(self,obj):
+        return format_html(obj.logo_html)
+    logo_render.allow_tags = True
+
+admin.site.register(Copyright,CopyrightAdmin)
 
 class FooterSectionAdmin(admin.ModelAdmin):
     list_display = [ "__unicode__","menu","pos" ]
