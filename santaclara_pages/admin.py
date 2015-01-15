@@ -23,7 +23,7 @@ class CopyrightAdmin(admin.ModelAdmin):
                 )
             }
     
-    def log_render(self,obj):
+    def logo_render(self,obj):
         return format_html(obj.logo_html)
     logo_render.allow_tags = True
 
