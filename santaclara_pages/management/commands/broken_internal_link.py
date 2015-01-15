@@ -29,6 +29,8 @@ class Command(BaseCommand):
         for page in pages[:2]:
             text=page.text()
             v=text.replace(r'//','&#47;').replace("[[","&#91;").replace("]]","&#93;")
-            t=tokenizer.split(v)
-            print t
+            tokens=tokenizer.split(v)
+            for token in tokens:
+                if not token[0]=="[": continue
+                print token
             
