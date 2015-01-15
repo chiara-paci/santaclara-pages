@@ -16,6 +16,7 @@ class Copyright(models.Model):
     short_name = models.CharField(max_length=2048,unique=True)
     long_name = models.CharField(max_length=2048,blank=True)
     logo_html = models.CharField(max_length=2048,blank=True)
+    url = models.CharField(max_length=2048,blank=True)
 
     def __unicode__(self):
         return unicode(self.long_name)
