@@ -148,7 +148,8 @@ class SchedaInline(admin.TabularInline):
     extra = 0
 
 class PageAdmin(VersionedObjectAdmin):
-    list_display=("name","title","has_toc")
+    list_display=("name","title","visible","has_toc","copyright")
+    list_editable=("visible","copyright")
     ordering=("name","title")
     inlines = (SchedaInline,PageMenuInline,VersionInline)
 

@@ -101,6 +101,8 @@ class Page(VersionedAbstract,DefaultUrl):
     has_toc = models.BooleanField(default=True)
     num_columns = models.PositiveIntegerField(default=1)
     menus = models.ManyToManyField(Menu,through="PageMenuRelation")
+    copyright = models.ForeignKey(Copyright,default=1)
+    visible = models.BooleanField(default=True)
     content_type = models.ForeignKey(ContentType,editable=False,blank=True,null=True)
 
     class Meta:
