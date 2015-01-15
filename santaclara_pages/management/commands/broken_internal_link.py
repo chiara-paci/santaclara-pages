@@ -26,12 +26,15 @@ class Command(BaseCommand):
         
         tokenizer=re.compile(regexp)
 
-        for page in pages[:2]:
+        for page in pages[2:5]:
             text=page.text()
             v=text.replace(r'//','&#47;').replace("[[","&#91;").replace("]]","&#93;")
             tokens=tokenizer.split(v)
             for token in tokens:
                 if not token: continue
                 if not token[0]=="[": continue
+                if token[1]=="/": continue
+                flag=( token[1:5] in [ "iurl","file" ] ) or  ( token[1:4] in [ "img" ] )
+                if not flag: continue
                 print token
             
