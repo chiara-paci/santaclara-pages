@@ -41,17 +41,14 @@ class Command(BaseCommand):
                 q=token.replace('[','').replace(']','')
                 if q[-1]=="/": q=q[:-1]
                 x=shlex_split(q)
+                args=x[1:]
+                params={}
                 if "=" in x[0]:
-                    args=x
-                    tag=x[0].split("=")[0]
+                    t=x[0].split('=')
+                    tag=t[0]
+                    params["tag_first"]="=".join(t[1:])
                 else:
                     tag=x[0]
-                    args=x[1:]
-                t=tag.split('=')
-                params={}
-                if len(t)>1:
-                    params["tag_first"]="=".join(t[1:])
-                    tag=t[0]
                 for arg in args:
                     t=arg.split("=")
                     if len(t)==1: continue
