@@ -74,6 +74,15 @@ class Command(BaseCommand):
                     except Image.DoesNotExist, e:
                         print "    internal image doesn't exist:",params["name"]
                     continue
+                if tag=="iurl":
+                    if not params.has_key("name"):
+                        params["name"]=params["page"]
+                    try:
+                        pother=Page.objects.get(name=params["name"])
+                        print "    ok",pother
+                    except Page.DoesNotExist, e:
+                        print "    internal page doesn't exist:",params["name"]
+                    continue
                 if not params.has_key("name"):
                     print "    q:",q
                 if tag=="file":
@@ -85,13 +94,6 @@ class Command(BaseCommand):
                         print "    ok",fname
                     except File.DoesNotExist, e:
                         print "    internal file doesn't exist:",params["name"]
-                    continue
-                if tag=="iurl":
-                    try:
-                        pother=Page.objects.get(name=params["name"])
-                        print "    ok",pother
-                    except Page.DoesNotExist, e:
-                        print "    internal page doesn't exist:",params["name"]
                     continue
 
             
