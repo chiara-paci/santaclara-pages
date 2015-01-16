@@ -58,10 +58,10 @@ class Command(BaseCommand):
                     if len(t)==1: continue
                     params[t[0]]='='.join(t[1:])
 
-                if not params.has_key("name"):
-                    print "    q:",q
 
                 if tag=="img":
+                    if not params.has_key("name"):
+                        params["name"]=params["img"]
                     if params.has_key("url"):
                         print "    image url:",url
                         continue
@@ -71,6 +71,8 @@ class Command(BaseCommand):
                     except Image.DoesNotExist, e:
                         print "    internal image doesn't exist:",params["name"]
                     continue
+                if not params.has_key("name"):
+                    print "    q:",q
                 if tag=="file":
                     if params.has_key("url"):
                         print "    file url:",url
