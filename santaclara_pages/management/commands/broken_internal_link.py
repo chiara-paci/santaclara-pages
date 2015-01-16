@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 
-from santaclara_pages.models import Page
+from santaclara_pages.models import Page,Image,File
 from santaclara_editor.santaclara_lang.utility import shlex_split
 
 class Command(BaseCommand):
