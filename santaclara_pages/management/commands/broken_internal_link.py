@@ -35,6 +35,9 @@ class Command(BaseCommand):
             for token in tokens:
                 if not token: continue
                 if not token[0]=="[": continue
+                if len(token)==1:
+                    print "    wrong bracket"
+                    continue
                 if token[1]=="/": continue
                 flag=( token[1:5] in [ "iurl","file" ] ) or  ( token[1:4] in [ "img" ] )
                 if not flag: continue
