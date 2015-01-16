@@ -45,7 +45,6 @@ class Command(BaseCommand):
                 except ValueError, e:
                     print "    q:",q
                     raise e
-                    
                 args=x[1:]
                 params={}
                 if "=" in x[0]:
@@ -58,6 +57,10 @@ class Command(BaseCommand):
                     t=arg.split("=")
                     if len(t)==1: continue
                     params[t[0]]='='.join(t[1:])
+
+                if not params.has_key("name"):
+                    print "    q:",q
+
                 if tag=="img":
                     if params.has_key("url"):
                         print "    image url:",url
