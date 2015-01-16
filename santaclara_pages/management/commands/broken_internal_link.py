@@ -32,7 +32,6 @@ class Command(BaseCommand):
             v=text.replace(r'//','&#47;').replace("[[","&#91;").replace("]]","&#93;")
             tokens=tokenizer.split(v)
             printed=False
-            print page
             for token in tokens:
                 if not token: continue
                 if not token[0]=="[": continue
