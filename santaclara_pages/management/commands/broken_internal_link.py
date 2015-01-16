@@ -27,7 +27,7 @@ class Command(BaseCommand):
         
         tokenizer=re.compile(regexp)
 
-        for page in pages[2:5]:
+        for page in pages:
             text=page.text()
             v=text.replace(r'//','&#47;').replace("[[","&#91;").replace("]]","&#93;")
             tokens=tokenizer.split(v)
