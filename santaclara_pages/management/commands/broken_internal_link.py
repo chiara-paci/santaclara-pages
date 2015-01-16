@@ -40,7 +40,12 @@ class Command(BaseCommand):
                 if not flag: continue
                 q=token.replace('[','').replace(']','')
                 if q[-1]=="/": q=q[:-1]
-                x=shlex_split(q)
+                try:
+                    x=shlex_split(q)
+                except ValueError, e:
+                    print "    q:",q
+                    raise e
+                    
                 args=x[1:]
                 params={}
                 if "=" in x[0]:
