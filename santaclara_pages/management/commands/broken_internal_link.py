@@ -31,11 +31,15 @@ class Command(BaseCommand):
             text=page.text()
             v=text.replace(r'//','&#47;').replace("[[","&#91;").replace("]]","&#93;")
             tokens=tokenizer.split(v)
+            printed=False
             print page
             for token in tokens:
                 if not token: continue
                 if not token[0]=="[": continue
                 if len(token)==1:
+                    if not printed:
+                        print page
+                        printed=True
                     print "    wrong bracket"
                     continue
                 if token[1]=="/": continue
@@ -46,8 +50,11 @@ class Command(BaseCommand):
                 try:
                     x=shlex_split(q)
                 except ValueError, e:
-                    print "    q:",q
-                    raise e
+                    if not printed:
+                        print page
+                        printed=True
+                    print "    wrong q:",q
+                    continue
                 args=x[1:]
                 params={}
                 if "=" in x[0]:
@@ -60,18 +67,21 @@ class Command(BaseCommand):
                     t=arg.split("=")
                     if len(t)==1: continue
                     params[t[0]]='='.join(t[1:])
-
-
                 if tag=="img":
                     if not params.has_key("name"):
                         params["name"]=params["img"]
                     if params.has_key("url"):
+                        if not printed:
+                            print page
+                            printed=True
                         print "    image url:",url
                         continue
                     try:
                         image=Image.objects.get(name=params["name"])
-                        print "    ok",image
                     except Image.DoesNotExist, e:
+                        if not printed:
+                            print page
+                            printed=True
                         print "    internal image doesn't exist:",params["name"]
                     continue
                 if tag=="iurl":
@@ -79,20 +89,30 @@ class Command(BaseCommand):
                         params["name"]=params["page"]
                     try:
                         pother=Page.objects.get(name=params["name"])
-                        print "    ok",pother
                     except Page.DoesNotExist, e:
+                        if not printed:
+                            print page
+                            printed=True
                         print "    internal page doesn't exist:",params["name"]
                     continue
                 if not params.has_key("name"):
+                    if not printed:
+                        print page
+                        printed=True
                     print "    q:",q
                 if tag=="file":
                     if params.has_key("url"):
+                        if not printed:
+                            print page
+                            printed=True
                         print "    file url:",url
                         continue
                     try:
                         fname=File.objects.get(name=params["name"])
-                        print "    ok",fname
                     except File.DoesNotExist, e:
+                        if not printed:
+                            print page
+                            printed=True
                         print "    internal file doesn't exist:",params["name"]
                     continue
 
