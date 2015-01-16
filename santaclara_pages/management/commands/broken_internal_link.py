@@ -46,7 +46,7 @@ class Command(BaseCommand):
                 if "=" in x[0]:
                     t=x[0].split('=')
                     tag=t[0]
-                    params["tag_first"]="=".join(t[1:])
+                    params["name"]="=".join(t[1:])
                 else:
                     tag=x[0]
                 for arg in args:
@@ -58,11 +58,27 @@ class Command(BaseCommand):
                         print "    image url:",url
                         continue
                     try:
-                        image=Image.objects.get(name=params["tag_first"])
+                        image=Image.objects.get(name=params["name"])
+                        print "    ok",image
                     except Image.DoesNotExist, e:
-                        print "    internal image doesn't exist:",params["tag_first"]
-                        pass
+                        print "    internal image doesn't exist:",params["name"]
+                    continue
+                if tag=="file":
+                    if params.has_key("url"):
+                        print "    file url:",url
+                        continue
+                    try:
+                        fname=File.objects.get(name=params["name"])
+                        print "    ok",fname
+                    except File.DoesNotExist, e:
+                        print "    internal file doesn't exist:",params["name"]
+                    continue
+                if tag=="iurl":
+                    try:
+                        pother=Page.objects.get(name=params["name"])
+                        print "    ok",pother
+                    except Page.DoesNotExist, e:
+                        print "    internal page doesn't exist:",params["name"]
+                    continue
 
-                
-                print token
             
