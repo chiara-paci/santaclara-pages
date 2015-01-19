@@ -139,7 +139,10 @@ class FileTag(tags.Tag):
         S='<a http="'+self.args["url"]+'">'
         if self.args["caption"]:
             for t in self.args["caption"]:
-                S+=t.output(autoescape)
+                x=t.output(autoescape)
+                if x[0:3]=="<p>":
+                    x=[3:-4]
+                S+=x
         else:
             S+=self.args["url"]
         S+="</a>"
