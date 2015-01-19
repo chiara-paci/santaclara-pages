@@ -16,7 +16,7 @@
 
 {% block contentscheda %}
 {% if page.scheda_set.all %}
-{% include "santaclara_pages/includes/menu.html" with scheda_list=page.scheda_set.all %}
+{% include "santaclara_pages/includes/scheda.html" with scheda_list=page.scheda_set.all %}
 {% endif %}
 {% endblock contentscheda %}
 
