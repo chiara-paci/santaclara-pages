@@ -80,15 +80,22 @@ class MenuObject(PositionAbstract):
 class MenuSeparator(MenuObject): 
     def __unicode__(self): return "sep"
 
+MENU_ITEM_LEVELS=[ (0,"base"),
+                   (1,"under h1"),
+                   (2,"under h2"),
+                   (3,"under h3"),
+                   (4,"under h4") ]
+MENU_TITLE_LEVELS=[ (1,"h1"), (2,"h2"), (3,"h3"), (4,"h4") ]
+
 class MenuItem(MenuObject):
-    level = models.IntegerField(default=0,choices=[ (0,"base"),(1,"under h1"), (2,"under h2"), (3,"under h3") ])
+    level = models.IntegerField(default=0,choices=MENU_ITEM_LEVELS)
     text = models.CharField(max_length=2048)
     url = models.CharField(max_length=4096,blank=True)
 
     def __unicode__(self): return(unicode(self.text))
 
 class MenuTitle(MenuObject):
-    level = models.IntegerField(default=1,choices=[ (1,"h1"), (2,"h2"), (3,"h3") ])
+    level = models.IntegerField(default=1,choices=MENU_TITLE_LEVELS)
     text = models.CharField(max_length=2048)
     url = models.CharField(max_length=4096,blank=True)
 
@@ -144,14 +151,14 @@ class PageMenuRelation(PositionAbstract):
         ordering = ['pos']
 
 class MenuItemInternal(MenuObject):
-    level = models.IntegerField(default=0,choices=[ (0,"under h1 (base)"),(1,"under h2"), (2,"under h3")])
+    level = models.IntegerField(default=0,choices=MENU_ITEM_LEVELS)
     text = models.CharField(max_length=2048)
     page = models.ForeignKey(Page)
 
     def __unicode__(self): return(unicode(self.text))
 
 class MenuTitleInternal(MenuObject):
-    level = models.IntegerField(default=1,choices=[ (1,"h1"), (2,"h2"), (3,"h3") ])
+    level = models.IntegerField(default=1,choices=MENU_TITLE_LEVELS)
     text = models.CharField(max_length=2048)
     page = models.ForeignKey(Page)
 
