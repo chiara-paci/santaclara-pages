@@ -9,6 +9,8 @@
   <div class="pagemenuitem"><h{{ item.level }}>{% if item.url %}<a href="{{ item.url }}">{% endif %}{{ item.text }}{% if item.url %}</a>{% endif %}</h{{ item.level }}></div>
   {% elif type == "menu item" %}
   <div class="pagemenuitem"><p class="level{{ item.level }}">{% if item.url %}<a href="{{ item.url }}">{% endif %}{{ item.text }}{% if item.url %}</a>{% endif %}</p></div>
+  {% elif type == "menu separator" %}
+  <hr/>
   {% else %}
   <div class="pagemenuitem"><p>{{ pos }}, {{ type }}, {{ item }}</p></div>
   {% endif %}
