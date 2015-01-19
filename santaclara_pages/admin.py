@@ -133,15 +133,15 @@ class SubMenuInline(admin.TabularInline):
     extra = 0
     fk_name = 'parent'
 
-class MenuAdmin(admin.ModelAdmin):
-    inlines=(SubMenuInline,MenuObjectInline,MenuTitleInternalInline,MenuTitleInline,MenuItemInternalInline,MenuItemInline,MenuSeparatorInline)
-    save_on_top=True
-
-admin.site.register(Menu,MenuAdmin)
-
 class PageMenuInline(admin.TabularInline):
     model = PageMenuRelation
     extra = 0
+
+class MenuAdmin(admin.ModelAdmin):
+    inlines=(PageMenuInline,SubMenuInline,MenuObjectInline,MenuTitleInternalInline,MenuTitleInline,MenuItemInternalInline,MenuItemInline,MenuSeparatorInline)
+    save_on_top=True
+
+admin.site.register(Menu,MenuAdmin)
 
 class SchedaInline(admin.TabularInline):
     model = Scheda
