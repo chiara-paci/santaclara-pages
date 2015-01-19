@@ -136,7 +136,7 @@ class FileTag(tags.Tag):
             self.args["caption"]=self.lang.get_tags(caption)
 
     def output(self,autoescape,outtype="html"):
-        S='<a http="'+self.args["url"]+'">'
+        S='<a href="'+self.args["url"]+'">'
         if self.args["caption"]:
             for t in self.args["caption"]:
                 x=t.output(autoescape)
