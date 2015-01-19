@@ -39,6 +39,8 @@ class IUrlTag(tags.Tag):
         S+="</a>"
         return(S)
 
+santaclara_editor.languages.language_register.add_tag("iurl",factories.mk_class_tag(IUrlTag))
+
 class ImgTag(tags.Tag):
     def __init__(self,lang,padre,ind,media_root,media_url):
         tags.Tag.__init__(self,lang,padre,inline=False)
@@ -100,7 +102,57 @@ class mk_img_tag(object):
         self.ind+=1
         return(ImgTag(lang,padre,self.ind,settings.MEDIA_ROOT,settings.MEDIA_URL))
 
-santaclara_editor.languages.language_register.add_tag("iurl",factories.mk_class_tag(IUrlTag))
 santaclara_editor.languages.language_register.add_tag("img",mk_img_tag())
 
+class FileTag(tags.Tag):
+    def __init__(self,lang,padre,ind,media_root,media_url):
+        tags.Tag.__init__(self,lang,padre,inline=False)
+        self.ind=ind
+        self.media_root=media_root
+        self.media_url=media_url
 
+    def set_args(self,args):
+        tags.Tag.set_args(self,args)
+        if not self.args.has_key("caption"):
+            caption=""
+            self.args["caption"]=""
+        else:
+            caption=self.args["caption"]
+        url=""
+        if not self.args.has_key("url"):
+            name=self.args[0].split("=")[1]
+            if name:
+                try:
+                    f=File.objects.get(name=name)
+                    url=f.path.replace(self.media_root,"")
+                    if not caption:
+                        caption=f.description
+                except File.DoesNotExist, e:
+                    pass
+        if url:
+            url=self.media_url+url
+        self.args["url"]=url
+        if not self.args["caption"] and caption:
+            self.args["caption"]=self.lang.get_tags(caption)
+
+    def output(self,autoescape,outtype="html"):
+        S='<a http="'+self.args["url"]+'">'
+        if self.args["caption"]:
+            for t in self.args["caption"]:
+                S+=t.output(autoescape)
+        else:
+            S+=self.args["url"]
+        S+="</a>"
+        return(S)
+
+class mk_file_tag(object):
+    def __init__(self):
+        self.ind=0
+
+    def reset(self): self.ind=0
+
+    def __call__(self,lang,padre):
+        self.ind+=1
+        return(FileTag(lang,padre,self.ind,settings.MEDIA_ROOT,settings.MEDIA_URL))
+
+santaclara_editor.languages.language_register.add_tag("file",mk_file_tag())
