@@ -141,7 +141,7 @@ class FileTag(tags.Tag):
             for t in self.args["caption"]:
                 x=t.output(autoescape)
                 if x[0:3]=="<p>":
-                    x=[3:-4]
+                    x=x[3:-4]
                 S+=x
         else:
             S+=self.args["url"]
