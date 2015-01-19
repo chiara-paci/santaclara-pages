@@ -28,7 +28,7 @@ class IUrlTag(tags.Tag):
             url=""
         else:
             try:
-                page=Page.objects.get(name=self.args["page"])
+                page=Page.objects.get(name__iexact=self.args["page"])
                 url=page.get_absolute_url()
                 hclass="validpagename"
             except Page.DoesNotExist, e:
@@ -60,7 +60,7 @@ class ImgTag(tags.Tag):
             name=self.args[0].split("=")[1]
             if name:
                 try:
-                    image=Image.objects.get(name=name)
+                    image=Image.objects.get(name__iexact=name)
                     url=image.path.replace(self.media_root,"")
                     if not caption:
                         caption=image.description
@@ -123,7 +123,7 @@ class FileTag(tags.Tag):
             name=self.args[0].split("=")[1]
             if name:
                 try:
-                    f=File.objects.get(name=name)
+                    f=File.objects.get(name__iexact=name)
                     url=f.path.replace(self.media_root,"")
                     if not caption:
                         caption=f.description
