@@ -78,7 +78,7 @@ class ImgTag(tags.Tag):
             S+='<div class="caption">'
             if type(self.args["caption"][0])==tags.ParagraphTag:
                 span=tags.SpanTag(self.lang,None,"title")
-                span.add("Fig. %d. " % self.ind)
+                span.add("Fig. %d.&nbsp;" % self.ind)
                 self.args["caption"][0].insert(0,span)
             else:
                 span.padre=self
