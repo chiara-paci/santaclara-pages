@@ -16,8 +16,7 @@ def get_by_id_or_name(model,key):
             obj=model.objects.get(name=key)
     except model.DoesNotExist:
         return None
-    
-
+    return obj
 
 @register.simple_tag
 def page_url(name):
