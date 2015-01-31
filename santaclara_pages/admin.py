@@ -6,7 +6,7 @@ from santaclara_pages.models import Menu,MenuSubMenuRelation,MenuObject,MenuSepa
 from santaclara_pages.models import Page,PageMenuRelation,MenuItemInternal,MenuTitleInternal,File,Image #,Icon
 from santaclara_pages.models import Scheda,SchedaValue,SchedaKey,FooterSection,HomeSection,HomeBlock,Copyright
 
-from santaclara_base.admin import VersionedObjectAdmin,VersionInline
+from santaclara_base.admin import VersionedObjectAdmin,VersionInline,TimestampAdmin
 
 from santaclara_pages.forms import MenuItemInternalForm,MenuTitleInternalForm
 
@@ -72,7 +72,7 @@ admin.site.register(Scheda,SchedaAdmin)
 admin.site.register(SchedaKey)
 admin.site.register(SchedaValue)
 
-class ImageAdmin(admin.ModelAdmin):
+class ImageAdmin(TimestampAdmin):
     list_display=('name','preview','url')
 
     def preview(self,obj):
@@ -83,7 +83,7 @@ class ImageAdmin(admin.ModelAdmin):
 admin.site.register(Image,ImageAdmin)
 #admin.site.register(Icon,ImageAdmin)
 
-class FileAdmin(admin.ModelAdmin):
+class FileAdmin(TimestampAdmin):
     list_display=('name','path')
 
 admin.site.register(File,FileAdmin)
@@ -137,7 +137,7 @@ class PageMenuInline(admin.TabularInline):
     model = PageMenuRelation
     extra = 0
 
-class MenuAdmin(admin.ModelAdmin):
+class MenuAdmin(TimestampAdmin):
     inlines=(PageMenuInline,SubMenuInline,MenuObjectInline,MenuTitleInternalInline,MenuTitleInline,MenuItemInternalInline,MenuItemInline,MenuSeparatorInline)
     save_on_top=True
 
