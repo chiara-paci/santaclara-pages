@@ -85,7 +85,7 @@ class ImgTag(tags.Tag):
                 span.padre=self
                 S+=span.output(autoescape)
             for t in self.args["caption"]:
-                print t
+                print "t",t
                 S+=t.output(autoescape)
             S+="</div>"
         else:
