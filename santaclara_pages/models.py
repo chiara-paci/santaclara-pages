@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.safestring import SafeUnicode
 
-from santaclara_base.models import PositionAbstract
+from santaclara_base.models import PositionAbstract,TimestampAbstract
 from santaclara_base.models import VersionedAbstract
 from santaclara_base.models import DefaultUrl
 
@@ -24,7 +24,7 @@ class Copyright(models.Model):
     def logo(self): 
         return SafeUnicode(self.logo_html)
 
-class Menu(models.Model):
+class Menu(TimestampAbstract):
     name = models.CharField(max_length=2048,unique=True)
     sub_menus = models.ManyToManyField("self",symmetrical=False,through="MenuSubMenuRelation")
 
@@ -101,7 +101,6 @@ class MenuTitle(MenuObject):
 
     def __unicode__(self): return("h"+unicode(self.level)+": "+unicode(self.text))
 
-
 class Page(VersionedAbstract,DefaultUrl): 
     name = models.CharField(max_length=1024,unique=True)
     title = models.CharField(max_length=2048,blank=True,default="")
@@ -165,7 +164,7 @@ class MenuTitleInternal(MenuObject):
 
     def __unicode__(self): return("h"+unicode(self.level)+": "+unicode(self.text))
 
-class File(models.Model): 
+class File(TimestampAbstract): 
     name = models.CharField(max_length=1024,unique=True)
     description = models.TextField()
     path = models.FilePathField(max_length=2048,path=settings.MEDIA_ROOT+"/files/",allow_folders=True)
@@ -176,7 +175,7 @@ class File(models.Model):
     def url(self):
         return self.path.replace(settings.MEDIA_ROOT,settings.MEDIA_URL)
 
-class Image(models.Model): 
+class Image(TimestampAbstract): 
     name = models.CharField(max_length=1024,unique=True)
     description = models.TextField()
     alternate = models.CharField(max_length=2048)
@@ -187,18 +186,6 @@ class Image(models.Model):
 
     def url(self):
         return self.path.replace(settings.MEDIA_ROOT,settings.MEDIA_URL)
-
-# class Icon(models.Model): 
-#     name = models.CharField(max_length=1024,unique=True)
-#     description = models.TextField()
-#     alternate = models.CharField(max_length=2048)
-#     path = models.FilePathField(max_length=2048,path=settings.MEDIA_ROOT+"/icons/",allow_folders=True)
-
-#     def __unicode__(self): 
-#         return unicode(self.name)
-
-#     def url(self):
-#         return self.path.replace(settings.MEDIA_ROOT,settings.MEDIA_URL)
 
 class SchedaKey(models.Model):
     name = models.CharField(max_length=1024,unique=True)
