@@ -1,0 +1,9 @@
+{% load staticfiles %}
+{% load santa_clara_editor %}
+
+  <div class="pagetocbox">
+    <div class="pagetoc">
+      <h1>{% trans "Table of contents" %}</h1>
+      <div class="pagetoctext">{{ page.text|santa_clara_toc }}</div>
+    </div>
+  </div>
