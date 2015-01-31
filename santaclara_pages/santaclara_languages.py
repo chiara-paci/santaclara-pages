@@ -70,7 +70,8 @@ class ImgTag(tags.Tag):
             url=self.media_url+url
         self.args["url"]=url
         if (not self.args["caption"]) and caption:
-            self.args["caption"]=self.lang.get_tags(caption)
+            self.args["caption"]=caption
+        self.args["caption"]=self.lang.get_tags(self.args["caption"])
 
     def output(self,autoescape,outtype="html"):
         S='<div class="imagebox"><div class="image"><img src="'+self.args["url"]+'"/>'
@@ -84,6 +85,7 @@ class ImgTag(tags.Tag):
                 span.padre=self
                 S+=span.output(autoescape)
             for t in self.args["caption"]:
+                print t
                 S+=t.output(autoescape)
             S+="</div>"
         else:
