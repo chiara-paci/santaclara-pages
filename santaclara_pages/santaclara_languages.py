@@ -27,8 +27,16 @@ class IUrlTag(tags.Tag):
         if not self.args["page"]:
             url=""
         else:
+            is_id=True
             try:
-                page=Page.objects.get(name__iexact=self.args["page"])
+                page_id=int(self.args["page"])
+            except ValueError, e:
+                is_id=False
+            try:
+                if is_id:
+                    page=Page.objects.get(id=page_id)
+                else:
+                    page=Page.objects.get(name__iexact=self.args["page"])
                 url=page.get_absolute_url()
                 hclass="validpagename"
             except Page.DoesNotExist, e:
