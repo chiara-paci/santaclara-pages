@@ -167,7 +167,7 @@ class MenuTitleInternal(MenuObject):
 class File(TimestampAbstract): 
     name = models.CharField(max_length=1024,unique=True)
     description = models.TextField()
-    path = models.FilePathField(max_length=2048,path=settings.MEDIA_ROOT+"/files/",allow_folders=True)
+    path = models.FilePathField(max_length=2048,path=settings.MEDIA_ROOT+"/santaclara_pages/files/",allow_folders=True)
 
     def __unicode__(self): 
         return unicode(self.name)
@@ -179,7 +179,7 @@ class Image(TimestampAbstract):
     name = models.CharField(max_length=1024,unique=True)
     description = models.TextField()
     alternate = models.CharField(max_length=2048)
-    path = models.FilePathField(max_length=2048,path=settings.MEDIA_ROOT+"/images/",allow_folders=True)
+    path = models.FilePathField(max_length=2048,path=settings.MEDIA_ROOT+"/santaclara_pages/images/",allow_folders=True)
 
     def __unicode__(self): 
         return unicode(self.name)
