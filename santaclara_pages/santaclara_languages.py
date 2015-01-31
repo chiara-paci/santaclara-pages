@@ -134,8 +134,9 @@ class FileTag(tags.Tag):
         if url:
             url=self.media_url+url
         self.args["url"]=url
-        if not self.args["caption"] and caption:
-            self.args["caption"]=self.lang.get_tags(caption)
+        if (not self.args["caption"]) and caption:
+            self.args["caption"]=caption
+        self.args["caption"]=self.lang.get_tags(self.args["caption"])
 
     def output(self,autoescape,outtype="html"):
         S='<a href="'+self.args["url"]+'">'
