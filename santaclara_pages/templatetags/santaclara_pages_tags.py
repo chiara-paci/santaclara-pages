@@ -13,7 +13,7 @@ def get_by_id_or_name(model,key):
         if is_id:
             obj=model.objects.get(id=obj_id)
         else:
-            obj=model.objects.get(name=key)
+            obj=model.objects.get(name__iexact=key)
     except model.DoesNotExist:
         return None
     return obj

@@ -69,7 +69,7 @@ class ImgTag(tags.Tag):
         if url:
             url=self.media_url+url
         self.args["url"]=url
-        if not self.args["caption"] and caption:
+        if (not self.args["caption"]) and caption:
             self.args["caption"]=self.lang.get_tags(caption)
 
     def output(self,autoescape,outtype="html"):
