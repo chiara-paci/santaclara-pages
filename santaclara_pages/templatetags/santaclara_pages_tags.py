@@ -3,98 +3,82 @@ from santaclara_pages.models import Page,Image,File
 
 register = template.Library()
 
-@register.simple_tag
-def page_url(name):
+def get_by_id_or_name(model,key):
     is_id=True
     try:
-        page_id=int(name)
+        obj_id=int(key)
     except ValueError, e:
         is_id=False
     try:
         if is_id:
-            page=Page.objects.get(id=page_id)
+            obj=model.objects.get(id=obj_id)
         else:
-            page=Page.objects.get(name=name)
-    except Page.DoesNotExist:
+            obj=model.objects.get(name=key)
+    except model.DoesNotExist:
+        return None
+    
+
+
+@register.simple_tag
+def page_url(name):
+    page=get_by_id_or_name(Page,name)
+    if not page:
         return ""
     return page.get_absolute_url()
 
 @register.simple_tag
 def page_class(name):
-    is_id=True
-    try:
-        page_id=int(name)
-    except ValueError, e:
-        is_id=False
-    try:
-        if is_id:
-            page=Page.objects.get(id=page_id)
-        else:
-            page=Page.objects.get(name=name)
-    except Page.DoesNotExist:
+    page=get_by_id_or_name(Page,name)
+    if not page:
         return "invalidpagename"
     return "validpagename"
 
 @register.simple_tag
 def image_url(name):
-    is_id=True
-    try:
-        image_id=int(name)
-    except ValueError, e:
-        is_id=False
-    try:
-        if is_id:
-            image=Image.objects.get(id=image_id)
-        else:
-            image=Image.objects.get(name=name)
-    except Image.DoesNotExist:
+    image=get_by_id_or_name(Image,name)
+    if not image:
         return ""
     return image.url()
 
 @register.simple_tag
 def image_class(name):
-    is_id=True
-    try:
-        image_id=int(name)
-    except ValueError, e:
-        is_id=False
-    try:
-        if is_id:
-            image=Image.objects.get(id=image_id)
-        else:
-            image=Image.objects.get(name=name)
-    except Image.DoesNotExist:
+    image=get_by_id_or_name(Image,name)
+    if not image:
         return "invalidimagename"
     return "validimagename"
 
 @register.simple_tag
-def file_url(name):
-    is_id=True
-    try:
-        file_id=int(name)
-    except ValueError, e:
-        is_id=False
-    try:
-        if is_id:
-            file=File.objects.get(id=file_id)
-        else:
-            file=File.objects.get(name=name)
-    except File.DoesNotExist:
+def image_description(name):
+    image=get_by_id_or_name(Image,name)
+    if not image:
         return ""
-    return file.url()
+    return unicode(image.description)
+
+@register.simple_tag
+def image_alt(name):
+    image=get_by_id_or_name(Image,name)
+    if not image:
+        return ""
+    return unicode(image.alternate)
+
+@register.simple_tag
+def file_url(name):
+    fobj=get_by_id_or_name(File,name)
+    if not fobj:
+        return ""
+    return fobj.url()
 
 @register.simple_tag
 def file_class(name):
-    is_id=True
-    try:
-        file_id=int(name)
-    except ValueError, e:
-        is_id=False
-    try:
-        if is_id:
-            file=File.objects.get(id=file_id)
-        else:
-            file=File.objects.get(name=name)
-    except File.DoesNotExist:
+    fobj=get_by_id_or_name(File,name)
+    if not fobj:
         return "invalidfilename"
     return "validfilename"
+
+@register.simple_tag
+def file_description(name):
+    fobj=get_by_id_or_name(File,name)
+    if not fobj:
+        return ""
+    return unicode(fobj.description)
+
