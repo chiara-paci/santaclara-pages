@@ -22,8 +22,10 @@
 
 {% block contenttoc %}
 {% if page.has_toc %}
-<h1>{% trans "Summary" %}</h1>
-<div class="pagesummary">{{ page.text|santa_clara_toc }}</div>
+<div class="pagetoc">
+  <h1>{% trans "Table of contents" %}</h1>
+  <div class="pagetoctext">{{ page.text|santa_clara_toc }}</div>
+</div>
 {% endif %}
 {% endblock contenttoc %}
 

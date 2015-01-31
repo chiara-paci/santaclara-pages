@@ -107,9 +107,10 @@ class Page(VersionedAbstract,DefaultUrl):
     title = models.CharField(max_length=2048,blank=True,default="")
     has_toc = models.BooleanField(default=True)
     num_columns = models.PositiveIntegerField(default=1)
+    visible = models.BooleanField(default=True)
+
     menus = models.ManyToManyField(Menu,through="PageMenuRelation")
     copyright = models.ForeignKey(Copyright,default=1)
-    visible = models.BooleanField(default=True)
     content_type = models.ForeignKey(ContentType,editable=False,blank=True,null=True)
 
     class Meta:
@@ -187,17 +188,17 @@ class Image(models.Model):
     def url(self):
         return self.path.replace(settings.MEDIA_ROOT,settings.MEDIA_URL)
 
-class Icon(models.Model): 
-    name = models.CharField(max_length=1024,unique=True)
-    description = models.TextField()
-    alternate = models.CharField(max_length=2048)
-    path = models.FilePathField(max_length=2048,path=settings.MEDIA_ROOT+"/icons/",allow_folders=True)
+# class Icon(models.Model): 
+#     name = models.CharField(max_length=1024,unique=True)
+#     description = models.TextField()
+#     alternate = models.CharField(max_length=2048)
+#     path = models.FilePathField(max_length=2048,path=settings.MEDIA_ROOT+"/icons/",allow_folders=True)
 
-    def __unicode__(self): 
-        return unicode(self.name)
+#     def __unicode__(self): 
+#         return unicode(self.name)
 
-    def url(self):
-        return self.path.replace(settings.MEDIA_ROOT,settings.MEDIA_URL)
+#     def url(self):
+#         return self.path.replace(settings.MEDIA_ROOT,settings.MEDIA_URL)
 
 class SchedaKey(models.Model):
     name = models.CharField(max_length=1024,unique=True)

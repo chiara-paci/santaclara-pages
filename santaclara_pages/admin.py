@@ -3,7 +3,7 @@ from django.utils.html import format_html
 
 # Register your models here.
 from santaclara_pages.models import Menu,MenuSubMenuRelation,MenuObject,MenuSeparator,MenuItem,MenuTitle
-from santaclara_pages.models import Page,PageMenuRelation,MenuItemInternal,MenuTitleInternal,File,Image,Icon
+from santaclara_pages.models import Page,PageMenuRelation,MenuItemInternal,MenuTitleInternal,File,Image #,Icon
 from santaclara_pages.models import Scheda,SchedaValue,SchedaKey,FooterSection,HomeSection,HomeBlock,Copyright
 
 from santaclara_base.admin import VersionedObjectAdmin,VersionInline
@@ -81,7 +81,7 @@ class ImageAdmin(admin.ModelAdmin):
     preview.allow_tags = True
 
 admin.site.register(Image,ImageAdmin)
-admin.site.register(Icon,ImageAdmin)
+#admin.site.register(Icon,ImageAdmin)
 
 class FileAdmin(admin.ModelAdmin):
     list_display=('name','path')
