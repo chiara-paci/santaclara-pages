@@ -86,10 +86,11 @@ class ImgTag(tags.Tag):
         if self.args["caption"]:
             S+='<div class="caption">'
             print "CAPTION",type(self.args["caption"][0])
-            if type(self.args["caption"][0])==unicode:
-                par=tags.ParagraphTag(self.lang,None)
-                par.add(self.args["caption"][0])
-                self.args["caption"][0]=par
+            for n in range(0,len(self.args["caption"])):
+                if type(self.args["caption"][n]) in [unicode,str]:
+                    par=tags.SpanTag(self.lang,None,"none")
+                    par.add(self.args["caption"][n])
+                    self.args["caption"][n]=par
             span=tags.SpanTag(self.lang,None,"title")
             span.add("Fig. %d" % self.ind)
             self.args["caption"][0].insert(0,span)
