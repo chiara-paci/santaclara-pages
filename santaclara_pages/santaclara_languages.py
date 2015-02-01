@@ -85,7 +85,7 @@ class ImgTag(tags.Tag):
         S='<div class="imagebox"><div class="image"><img src="'+self.args["url"]+'"/>'
         if self.args["caption"]:
             S+='<div class="caption">'
-            print "CAPTION",self.args["caption"][0]
+            print "CAPTION",type(self.args["caption"][0])
             if type(self.args["caption"][0])==tags.ParagraphTag:
                 span=tags.SpanTag(self.lang,None,"title")
                 span.add("Fig. %d" % self.ind)
