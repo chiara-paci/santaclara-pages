@@ -90,6 +90,7 @@ class ImgTag(tags.Tag):
                 span.add("Fig. %d" % self.ind)
                 self.args["caption"][0].insert(0,span)
             else:
+                print self.args["caption"][0]
                 span.padre=self
                 S+=span.output(autoescape)
             for t in self.args["caption"]:
